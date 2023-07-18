@@ -1,4 +1,4 @@
-package ru.netology.authorities;
+package ru.netology.repository.authorities;
 
 public enum Authorities {
     READ,

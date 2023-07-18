@@ -1,8 +1,10 @@
 package ru.netology.service;
 
 import org.springframework.stereotype.Service;
-import ru.netology.authorities.Authorities;
+import ru.netology.repository.authorities.Authorities;
 import ru.netology.repository.UserRepository;
+import ru.netology.exceptions.InvalidCredentials;
+import ru.netology.exceptions.UnauthorizedUser;
 
 import java.util.List;
 

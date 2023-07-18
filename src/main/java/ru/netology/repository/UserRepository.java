@@ -1,7 +1,7 @@
 package ru.netology.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.netology.authorities.Authorities;
+import ru.netology.repository.authorities.Authorities;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ public class UserRepository {
         allAuthorities.add(Authorities.WRITE);
 
         List<Authorities> onlyRead = new ArrayList<>();
-        allAuthorities.add(Authorities.READ);
+        onlyRead.add(Authorities.READ);
 
         Map<String, List<Authorities>> passwordAndAuthoritiesAlex = new HashMap<>();
         passwordAndAuthoritiesAlex.put("12345", allAuthorities);
@@ -24,7 +24,7 @@ public class UserRepository {
         Map<String, List<Authorities>> passwordAndAuthoritiesOleg = new HashMap<>();
         passwordAndAuthoritiesOleg.put("54321", onlyRead);
 
-        authorizedUsers.put("alex", passwordAndAuthoritiesAlex);
+        authorizedUsers.put("Alex", passwordAndAuthoritiesAlex);
         authorizedUsers.put("Oleg", passwordAndAuthoritiesOleg);
     }
 
