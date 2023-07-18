@@ -1,13 +1,14 @@
 package ru.netology.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.netology.repository.authorities.Authorities;
+import ru.netology.model.User;
+import ru.netology.model.authorities.Authorities;
 
 import java.util.*;
 
 @Repository
 public class UserRepository {
-    private final Map<String, Map<String, List<Authorities>>> authorizedUsers = new HashMap<>();
+    private final Map<User, List<Authorities>> authorizedUsers = new HashMap<>();
 
     {
         List<Authorities> allAuthorities = new ArrayList<>();
@@ -18,22 +19,18 @@ public class UserRepository {
         List<Authorities> onlyRead = new ArrayList<>();
         onlyRead.add(Authorities.READ);
 
-        Map<String, List<Authorities>> passwordAndAuthoritiesAlex = new HashMap<>();
-        passwordAndAuthoritiesAlex.put("12345", allAuthorities);
+        User userAlex = new User("Alex", "12345");
+        User userOleg = new User("Oleg", "54321");
 
-        Map<String, List<Authorities>> passwordAndAuthoritiesOleg = new HashMap<>();
-        passwordAndAuthoritiesOleg.put("54321", onlyRead);
-
-        authorizedUsers.put("Alex", passwordAndAuthoritiesAlex);
-        authorizedUsers.put("Oleg", passwordAndAuthoritiesOleg);
+        authorizedUsers.put(userAlex, allAuthorities);
+        authorizedUsers.put(userOleg, onlyRead);
     }
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
+    public List<Authorities> getUserAuthorities(User user) {
         if (authorizedUsers.containsKey(user)) {
-            if (authorizedUsers.get(user).containsKey(password)) {
-                return authorizedUsers.get(user).get(password);
-            }
+            return authorizedUsers.get(user);
         }
+
         return Collections.emptyList();
     }
 }
